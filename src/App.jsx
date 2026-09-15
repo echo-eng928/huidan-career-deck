@@ -13,7 +13,14 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('hero');
   const [editLang, setEditLang] = useState('zh');
 
-  // 内容状态数据层（支持持久化）
+  // 自动清理含有旧错字或旧结构的旧缓存，防止污染界面
+  useEffect(() => {
+    const saved = localStorage.getItem('huidan_deck_content');
+    if (saved && (saved.includes('沉') || saved.includes('沉惠丹'))) {
+      localStorage.removeItem('huidan_deck_content');
+    }
+  }, []);
+
   const [contentData, setContentData] = useState(() => {
     const saved = localStorage.getItem('huidan_deck_content');
     return saved ? JSON.parse(saved) : {};
@@ -21,7 +28,7 @@ export default function App() {
 
   const [draftContent, setDraftContent] = useState(contentData);
 
-  // 键盘暗号监听逻辑：1 秒内快速连按 3 次 Shift 键召唤后台抽屉
+  // 1 秒内连按 3 次 Shift 唤醒/隐藏后台
   useEffect(() => {
     let shiftCount = 0;
     let timer = null;
@@ -29,7 +36,6 @@ export default function App() {
     const handleKeyDown = (e) => {
       if (e.key === 'Shift') {
         shiftCount += 1;
-
         if (timer) clearTimeout(timer);
 
         if (shiftCount >= 3) {
@@ -62,13 +68,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FBFBFA] text-[#111111] font-sans antialiased selection:bg-[#1E40AF] selection:text-white pt-14">
-      {/* 顶部 Header（隐形 ⚙ 按钮） */}
       <Header 
         lang={lang} 
         setLang={setLang} 
       />
 
-      {/* 8 大核心 Slide 模块 */}
       <main className="space-y-0">
         <Hero data={contentData} lang={lang} />
         <Career data={contentData} lang={lang} />
@@ -77,7 +81,6 @@ export default function App() {
         <Contact data={contentData} lang={lang} />
       </main>
 
-      {/* 后台暗号管理抽屉 */}
       <AdminDrawer
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}

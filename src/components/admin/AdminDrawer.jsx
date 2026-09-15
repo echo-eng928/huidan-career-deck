@@ -500,7 +500,7 @@ export default function AdminDrawer({
                   <label className="text-[10px] font-mono text-[#666666] block">Article Title</label>
                   <input
                     type="text"
-                    value={content.aboutArticle?.title || '理想伙伴说︱耐世特李军：相信“看见”的力量，与理想汽车一起走得更好、走得更远'}
+                    value={content.aboutArticle?.title || '理想伙伴说︱米其林王艳：与中国汽车市场一起热辣滚烫'}
                     onChange={(e) => updateArticle('title', e.target.value)}
                     className="w-full p-1.5 border border-[#E5E5E0] bg-white rounded-xs font-bold"
                   />
@@ -509,7 +509,7 @@ export default function AdminDrawer({
                   <label className="text-[10px] font-mono text-[#666666] block">URL Link</label>
                   <input
                     type="text"
-                    value={content.aboutArticle?.link || 'https://mp.weixin.qq.com/s/9tQYpW8GZ-M47V_sQ5eM-g'}
+                    value={content.aboutArticle?.link || 'https://mp.weixin.qq.com/s/sncGz4JDiX6tnPy-0lTa5g'}
                     onChange={(e) => updateArticle('link', e.target.value)}
                     className="w-full p-1.5 border border-[#E5E5E0] bg-white rounded-xs font-mono text-[#1E40AF]"
                   />

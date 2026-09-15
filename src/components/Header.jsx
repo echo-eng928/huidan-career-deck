@@ -30,7 +30,7 @@ export default function Header({ lang, setLang }) {
               {currentLang === 'zh' ? '公开内容' : 'ABOUT'}
             </a>
             <a href="#slide-05" className="hover:text-[#111111] transition-colors uppercase">
-              {currentLang === 'zh' ? '联系方式' : 'CONTACT'}
+              {currentLang === 'zh' ? '联系我' : 'Get in Touch'}
             </a>
           </nav>
 

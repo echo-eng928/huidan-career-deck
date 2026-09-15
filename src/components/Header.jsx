@@ -7,17 +7,17 @@ export default function Header({ activeSlide, lang, setLang }) {
     <header className="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#E5E5E0]">
       <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
         
-        {/* 左侧 Header Logo & 标题 */}
+        {/* 左侧 Logo & 标题：固定为正确的“沈绘丹” */}
         <div className="flex items-center space-x-3">
           <span className="font-serif font-bold tracking-tight text-lg text-[#111111]">
-            HUIDAN SHEN
+            {currentLang === 'zh' ? '沈绘丹' : 'HUIDAN SHEN'}
           </span>
           <span className="text-xs font-mono text-[#666666] hidden sm:inline-block">
             / PORTFOLIO
           </span>
         </div>
 
-        {/* 右侧：仅保留导航与中英文切换（⚙ 设置图标已隐形） */}
+        {/* 右侧导航与语言切换 */}
         <div className="flex items-center space-x-6 text-xs font-mono">
           <nav className="hidden md:flex items-center space-x-5 text-[#666666]">
             <a href="#slide-03" className="hover:text-[#111111] transition-colors uppercase">
@@ -34,7 +34,6 @@ export default function Header({ activeSlide, lang, setLang }) {
             </a>
           </nav>
 
-          {/* 语言切换按钮 */}
           <div className="flex border border-[#E5E5E0] rounded-xs p-0.5 bg-[#FBFBFA]">
             <button
               onClick={() => setLang('zh')}

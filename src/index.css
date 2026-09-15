@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 基础全局样式 */
+html, body {
+  background-color: #FBFBFA;
+  color: #111111;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #1E40AF;
+  color: #ffffff;
+}
+
+/* 桌面端 Full-Screen Career Deck 滚动停靠优化 (≥1024px) */
+@media (min-width: 1024px) {
+  .deck-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y proximity; /* 改为 proximity 近距离软停靠，解除强制吸附滑走的死锁感 */
+    scroll-behavior: smooth;
+  }
+
+  .deck-slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-margin-top: 1.5rem; /* 顶部预留留白，让底部内容完全进入视口中央 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    box-sizing: border-box;
+  }
+}
+
+/* 移动端无缝流动 (<1024px) */
+@media (max-width: 1023px) {
+  .deck-container {
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
+  }
+
+  .deck-slide {
+    min-height: 100vh;
+    height: auto;
+    scroll-snap-align: none;
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* 隐藏滚动条 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

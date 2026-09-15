@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Cpu } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 export default function About({ lang }) {
   const currentLang = lang || 'zh';
@@ -10,55 +10,54 @@ export default function About({ lang }) {
       : 'Li Auto Partner Stories: Michelin Wang Yan — Booming with the Chinese Auto Market',
     link: 'https://mp.weixin.qq.com/s/sncGz4JDiX6tnPy-0lTa5g',
     role: currentLang === 'zh' 
-      ? '角色：合作伙伴访谈协调 · 参与 · 内容架构' 
-      : 'ROLE: Partner Interview Coordination · Participation · Content Structuring',
-    process: currentLang === 'zh' 
-      ? '流程：整理问题 → 开始访谈 → 构建访谈结构 → 发布' 
-      : 'PROCESS: Align Questions → Join Interview → Structure → Publish'
+      ? '角色：访谈协调 · 现场参与 · 内容整理 · 模板化发布' 
+      : 'ROLE: Interview Coordination · On-site Participation · Content Structuring · Standardized Publishing',
+    process: 'COORDINATE → ALIGN QUESTIONS → JOIN INTERVIEW → STRUCTURE → PUBLISH'
   };
 
   return (
-    <section id="slide-07" className="deck-slide border-b border-[#E5E5E0]">
-      <div className="max-w-5xl mx-auto px-6 w-full space-y-8">
+    <section id="slide-04" className="deck-slide border-b border-[#E5E5E0]">
+      <div className="max-w-5xl mx-auto px-6 w-full space-y-6">
         
-        <div className="flex items-center justify-between">
+        {/* 页码修正为 04 / */}
+        <div className="flex items-center justify-between border-b border-[#E5E5E0] pb-4">
           <div className="flex items-center space-x-3">
-            <span className="text-xs font-mono text-[#1E40AF] font-bold">07 /</span>
+            <span className="text-xs font-mono text-[#1E40AF] font-bold">04 /</span>
             <h2 className="text-2xl font-serif font-bold tracking-tight text-[#111111]">
-              {currentLang === 'zh' ? '作品留痕与 AI 实践' : 'Published Content & AI Practice'}
+              {currentLang === 'zh' ? '公开内容与 AI 实践' : 'PUBLIC CONTENT & AI PRACTICE'}
             </h2>
           </div>
           <span className="text-xs font-mono text-[#666666] tracking-widest uppercase">
-            SELECTED ESSAYS & WORKFLOW
+            SELECTED WORK & AI PRACTICE
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <p className="text-xs font-sans text-[#666666] leading-relaxed max-w-3xl">
+          {currentLang === 'zh' 
+            ? '从真实工作中的内容协作，到个人项目中的 AI 辅助实践，我更关注如何把想法变成可以被使用的结果。' 
+            : 'From content collaboration in real work to AI-assisted personal projects, I focus on turning ideas into usable outcomes.'}
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch pt-2">
           
-          {/* 左侧：文章与写作留痕 */}
-          <div className="md:col-span-7 space-y-6">
+          <div className="md:col-span-7 space-y-5 flex flex-col justify-between">
             
-            {/* 1. 职业专访作品 */}
-            <div className="bg-white p-6 border border-[#E5E5E0] rounded-xs shadow-xs space-y-3">
+            <div className="bg-white p-5 border border-[#E5E5E0] rounded-xs shadow-xs space-y-3">
               <div className="flex items-center justify-between border-b border-[#E5E5E0] pb-2">
-                <span className="text-xs font-mono font-bold text-[#1E40AF]">
-                  {currentLang === 'zh' ? '专业内容' : 'PROFESSIONAL CONTENT'}
-                </span>
-                <span className="text-[10px] font-mono text-[#666666]">
-                  {currentLang === 'zh' ? '合伙人访谈' : 'PARTNER INTERVIEW'}
-                </span>
+                <span className="text-xs font-mono font-bold text-[#1E40AF]">PUBLIC CONTENT / PROFESSIONAL</span>
+                <span className="text-[10px] font-mono text-[#666666]">PARTNER INTERVIEW</span>
               </div>
 
-              <h3 className="text-base font-serif font-bold text-[#111111] pt-1">
+              <h3 className="text-sm font-serif font-bold text-[#111111] leading-snug">
                 {article.title}
               </h3>
 
               <div className="space-y-1 text-xs font-mono text-[#666666]">
                 <div>{article.role}</div>
-                <div>{article.process}</div>
+                <div className="text-[10px] text-[#1E40AF]/80 tracking-tight">{article.process}</div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-1 border-t border-[#F0F0ED]">
                 <a 
                   href={article.link} 
                   target="_blank" 
@@ -66,20 +65,15 @@ export default function About({ lang }) {
                   className="inline-flex items-center space-x-1.5 text-xs font-mono text-[#1E40AF] hover:underline font-bold"
                 >
                   <span>{currentLang === 'zh' ? '阅读文章（微信公众号）' : 'READ ARTICLE (WeChat Official Account)'}</span>
-                  <ExternalLink size={14} />
+                  <ExternalLink size={13} />
                 </a>
               </div>
             </div>
 
-            {/* 2. 个人写作留痕 */}
-            <div className="bg-white p-6 border border-[#E5E5E0] rounded-xs shadow-xs space-y-4">
+            <div className="bg-white p-5 border border-[#E5E5E0] rounded-xs shadow-xs space-y-3">
               <div className="flex items-center justify-between border-b border-[#E5E5E0] pb-2">
-                <span className="text-xs font-mono font-bold text-[#1E40AF]">
-                  {currentLang === 'zh' ? '个人写作' : 'PERSONAL WRITING'}
-                </span>
-                <span className="text-[10px] font-mono text-[#666666]">
-                  {currentLang === 'zh' ? '发表于《三联生活周刊》' : 'PUBLISHED ON SANLIAN LIFEWEEK'}
-                </span>
+                <span className="text-xs font-mono font-bold text-[#1E40AF]">PERSONAL WRITING</span>
+                <span className="text-[10px] font-mono text-[#666666]">SANLIAN LIFEWEEK</span>
               </div>
 
               <div className="space-y-3">
@@ -92,7 +86,7 @@ export default function About({ lang }) {
                   </div>
                 </div>
 
-                <div className="space-y-1">
+                <div className="border-t border-[#F0F0ED] pt-2 space-y-1">
                   <div className="text-xs font-serif font-bold text-[#111111]">
                     《参加完朋友婚礼后，我们的友谊到此为止》
                   </div>
@@ -105,43 +99,54 @@ export default function About({ lang }) {
 
           </div>
 
-          {/* 右侧：AI 实践与工作流 */}
-          <div className="md:col-span-5 bg-white p-6 border border-[#E5E5E0] rounded-xs shadow-xs flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
+          <div className="md:col-span-5 bg-white p-5 border border-[#E5E5E0] rounded-xs shadow-xs flex flex-col justify-between space-y-4">
+            
+            <div className="space-y-3">
               <div className="flex items-center justify-between border-b border-[#E5E5E0] pb-2">
-                <span className="text-xs font-mono font-bold text-[#1E40AF] flex items-center space-x-1.5">
-                  <Cpu size={14} />
-                  <span>{currentLang === 'zh' ? '采用人工智能构建' : 'AI-ASSISTED WORKFLOW'}</span>
-                </span>
-                <span className="text-[10px] font-mono text-[#666666]">
-                  {currentLang === 'zh' ? '从原型到部署' : 'CONCEPT TO DEPLOYMENT'}
-                </span>
+                <span className="text-xs font-mono font-bold text-[#1E40AF]">BUILT WITH AI</span>
+                <span className="text-[10px] font-mono text-[#666666]">PRACTICE</span>
               </div>
 
               <p className="text-xs font-sans text-[#666666] leading-relaxed">
                 {currentLang === 'zh'
-                  ? '这个职业发展演示文稿是使用 Gemini + VS Code + React 独立开发的，将想法从概念转化为成型产品。'
-                  : 'This career deck concept was independently developed using Gemini + VS Code + React, translating ideas into deployed web applications.'}
+                  ? '这个职业档案网站由我提出内容结构与交互方向，并使用 Gemini + VS Code + React 完成搭建与部署。'
+                  : 'I defined the content structure and interaction direction, then used Gemini + VS Code + React to build and deploy this career profile.'}
               </p>
 
-              <div className="p-4 bg-[#FBFBFA] border border-[#E5E5E0] rounded-xs text-center space-y-2">
-                <blockquote className="font-serif font-bold text-xs text-[#1E40AF] leading-snug">
-                  “{currentLang === 'zh' 
-                    ? '人工智能帮助我完成了搭建。至于搭建什么，是我决定的。' 
-                    : 'AI helped me execute the code. What to build was my decision.'}”
-                </blockquote>
-                <div className="text-[10px] font-mono text-[#666666]">
-                  {currentLang === 'zh' 
-                    ? '我负责制定架构和战略，人工智能辅助执行。' 
-                    : 'Human defines structure & strategy, AI assists execution.'}
+              <div className="p-3 bg-[#FBFBFA] border border-[#E5E5E0] rounded-xs">
+                <div className="text-[10px] font-mono text-[#666666] mb-2 font-bold uppercase tracking-wider border-b border-[#E5E5E0] pb-1">
+                  WORKFLOW
+                </div>
+                <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px] text-[#111111] font-bold">
+                  <span>IDEA</span>
+                  <span className="text-[#1E40AF]">→</span>
+                  <span>STRUCTURE</span>
+                  <span className="text-[#1E40AF]">→</span>
+                  <span>AI 协作</span>
+                  <span className="text-[#1E40AF]">→</span>
+                  <span>CODE</span>
+                  <span className="text-[#1E40AF]">→</span>
+                  <span>ITERATE</span>
+                  <span className="text-[#1E40AF]">→</span>
+                  <span className="text-[#1E40AF]">DEPLOY</span>
                 </div>
               </div>
             </div>
 
-            <div className="text-[10px] font-mono text-[#666666] border-t border-[#E5E5E0] pt-3 flex justify-between">
+            <div className="p-3 bg-[#FBFBFA] border-l-2 border-[#1E40AF] space-y-1">
+              <div className="font-serif font-bold text-xs text-[#111111]">
+                “AI helped me build it. I decided what to build.”
+              </div>
+              <div className="text-[10px] font-sans text-[#666666]">
+                {currentLang === 'zh' ? '「AI 帮助我完成搭建。至于搭建什么，由我决定。」' : ''}
+              </div>
+            </div>
+
+            <div className="text-[10px] font-mono text-[#666666] border-t border-[#E5E5E0] pt-2 flex justify-between">
               <span>TECH STACK: Vite / React / Tailwind</span>
               <span>DEPLOY: Vercel</span>
             </div>
+
           </div>
 
         </div>

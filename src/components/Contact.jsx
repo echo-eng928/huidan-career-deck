@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Mail, MessageSquare, Copy, Check } from 'lucide-react';
 
-export default function Contact({ data, lang }) {
+export default function Contact({ lang }) {
   const currentLang = lang || 'zh';
   const [copiedField, setCopiedField] = useState(null);
 
-  // 固定的真实电子邮箱与微信
   const email = 'echoa981@gmail.com';
   const wechat = 'adeline928';
 
@@ -16,12 +15,13 @@ export default function Contact({ data, lang }) {
   };
 
   return (
-    <section id="slide-08" className="deck-slide">
+    <section id="slide-05" className="deck-slide">
       <div className="max-w-5xl mx-auto px-6 w-full space-y-8">
         
+        {/* 页码修正为 05 / */}
         <div className="flex items-center justify-between border-b border-[#E5E5E0] pb-4">
           <div className="flex items-center space-x-3">
-            <span className="text-xs font-mono text-[#1E40AF] font-bold">08 /</span>
+            <span className="text-xs font-mono text-[#1E40AF] font-bold">05 /</span>
             <h2 className="text-2xl font-serif font-bold tracking-tight text-[#111111]">
               {currentLang === 'zh' ? '联系后续讨论' : 'Connect for Discussion'}
             </h2>
@@ -62,7 +62,6 @@ export default function Contact({ data, lang }) {
               {currentLang === 'zh' ? '直达频道' : 'DIRECT CHANNELS'}
             </div>
 
-            {/* Email */}
             <div className="p-3 bg-[#FBFBFA] border border-[#E5E5E0] rounded-xs flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Mail size={16} className="text-[#1E40AF]" />
@@ -74,13 +73,11 @@ export default function Contact({ data, lang }) {
               <button 
                 onClick={() => handleCopy(email, 'email')}
                 className="p-1.5 text-[#666666] hover:text-[#111111] transition-colors"
-                title="复制邮箱"
               >
                 {copiedField === 'email' ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
               </button>
             </div>
 
-            {/* WeChat */}
             <div className="p-3 bg-[#FBFBFA] border border-[#E5E5E0] rounded-xs flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <MessageSquare size={16} className="text-[#1E40AF]" />
@@ -92,7 +89,6 @@ export default function Contact({ data, lang }) {
               <button 
                 onClick={() => handleCopy(wechat, 'wechat')}
                 className="p-1.5 text-[#666666] hover:text-[#111111] transition-colors"
-                title="复制微信"
               >
                 {copiedField === 'wechat' ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
               </button>

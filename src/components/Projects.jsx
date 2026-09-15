@@ -3,14 +3,12 @@ import React from 'react';
 export default function Projects({ lang }) {
   const currentLang = lang || 'zh';
 
-  const defaultProjects = currentLang === 'zh' ? [
+  const projects = currentLang === 'zh' ? [
     {
       category: 'BUSINESS CASE 01',
       title: '供应商与合作伙伴关系维护、社区运营及技术展统筹落地',
-      context: '理想汽车需要面向核心技术供应商打造标准化内容传达与展览展示体系，强化品牌协作信任。',
       role: '合作伙伴管理与内容运营负责人',
       description: '主导“理想伙伴说”标准化采访流程搭建，跨部门统筹多家顶级技术供应商的技术展与访谈策划。',
-      collaboration: '与研发部、品牌部、外部供应商高层协同沟通。',
       outcome: [
         '统筹 10+ 核心伙伴参展',
         '展示满意度达 85%',
@@ -20,10 +18,8 @@ export default function Projects({ lang }) {
     {
       category: 'BUSINESS CASE 02',
       title: '西区抖音渠道直播 SOP 建立与线索转化优化',
-      context: '针对西区新媒体直播渠道后链路转化率低、流程不规范的问题开展专项突破。',
       role: '新媒体运营与流程标准制定',
       description: '梳理直播脚本、主播话术与后链路线索跟进 SOP，建立标准化跟进机制。',
-      collaboration: '协同区域销售团队、直播运营小组。',
       outcome: [
         '制定直播话术、后链路转化标准化 SOP',
         '直播线索转化率达 50%',
@@ -33,10 +29,8 @@ export default function Projects({ lang }) {
     {
       category: 'BUSINESS CASE 03',
       title: '渠道商户分层管理与竞价沉没成本优化',
-      context: '在滴滴出行负责渠道交易监控与履约风险识别，优化商户分层与预算分配。',
       role: '渠道运营与成本控制',
       description: '引入商户竞价机制与阶梯分润模式，监控履约风险，实施精细化预算再分配。',
-      collaboration: '协同风控部门、财务团队及区域渠道服务商。',
       outcome: [
         '释放 20万+ 灵活预算',
         '单T成本下降 15%',
@@ -46,10 +40,8 @@ export default function Projects({ lang }) {
     {
       category: 'BUSINESS CASE 04',
       title: '常态化交易与履约风险监测看板搭建',
-      context: '缺乏针对商户履约质量与异常交易的快速预警机制，导致运营干预滞后。',
       role: '运营监控与数据分析',
       description: '搭设关键指标监控看板，建立异常交易实时警示机制，保障交易稳定性。',
-      collaboration: '协同数据分析师、技术产品团队。',
       outcome: [
         '构建常态化数据监测看板',
         '及时识别履约风险项',
@@ -60,10 +52,8 @@ export default function Projects({ lang }) {
     {
       category: 'BUSINESS CASE 01',
       title: 'Vendor Relations, Community Operations & Tech Exhibition Lead',
-      context: 'Li Auto needed a standardized partner interview and exhibition framework for key technology vendors.',
-      role: 'Partner Governance & Content Operations Lead',
-      description: 'Architected standardized interview SOPs for "Li Auto Partner Stories" and led cross-functional tech exhibition execution.',
-      collaboration: 'Collaborated with R&D, Brand Teams, and Vendor Executives.',
+      role: 'Partner Governance & Content Lead',
+      description: 'Architected standardized interview SOPs for "Li Auto Partner Stories" and led tech exhibition execution.',
       outcome: [
         '10+ Key Vendors Coordinated',
         '85% Partner Satisfaction',
@@ -73,10 +63,8 @@ export default function Projects({ lang }) {
     {
       category: 'BUSINESS CASE 02',
       title: 'West Region Douyin Live-Streaming SOP & Lead Optimization',
-      context: 'Streamlined low lead conversion and unstandardized scripts across regional live-streaming sales channels.',
-      role: 'New Media Operations & SOP Lead',
+      role: 'New Media Operations Lead',
       description: 'Structured script templates and post-stream follow-up SOPs, raising conversion standards.',
-      collaboration: 'Coordinated with Regional Sales and Live Operations Teams.',
       outcome: [
         'Standardized Script SOPs Established',
         '50% Lead Conversion Rate',
@@ -86,23 +74,19 @@ export default function Projects({ lang }) {
     {
       category: 'BUSINESS CASE 03',
       title: 'Merchant Tiering Governance & Bidding Cost Optimization',
-      context: 'Monitored transaction compliance and fulfillment risks at Didi, optimizing merchant budget allocations.',
-      role: 'Channel Operations & Cost Control Manager',
-      description: 'Introduced merchant bidding mechanisms, tier-based profit splits, and fine-tuned budget reallocations.',
-      collaboration: 'Partnered with Risk Control, Finance, and Regional Agency Leads.',
+      role: 'Channel Ops Manager',
+      description: 'Introduced merchant bidding mechanisms and tier-based profit splits to reallocate budgets.',
       outcome: [
         'RMB 200K+ Budget Reallocated',
-        '15% Cost per Online Hour (Cost per T) Reduction',
+        '15% Cost per T Reduction',
         'Streamlined Merchant Governance'
       ]
     },
     {
       category: 'BUSINESS CASE 04',
       title: 'Risk Alert Model & Regular Transaction Governance Dashboard',
-      context: 'Mitigated delayed operational intervention caused by lack of real-time fulfillment risk tracking.',
-      role: 'Operations Monitoring & Analytics',
+      role: 'Operations Analytics',
       description: 'Built transaction alert models and daily governance dashboards to safeguard channel compliance.',
-      collaboration: 'Worked with Data Analysts and Product Engineering.',
       outcome: [
         'Built Risk Alert Model & Dashboards',
         'Regular Tracking of Compliance Risks',
@@ -112,12 +96,13 @@ export default function Projects({ lang }) {
   ];
 
   return (
-    <section id="slide-04" className="deck-slide border-b border-[#E5E5E0]">
+    <section id="slide-03" className="deck-slide border-b border-[#E5E5E0]">
       <div className="max-w-5xl mx-auto px-6 w-full space-y-8">
         
+        {/* 页码修正为 03 / */}
         <div className="flex items-center justify-between border-b border-[#E5E5E0] pb-4">
           <div className="flex items-center space-x-3">
-            <span className="text-xs font-mono text-[#1E40AF] font-bold">04 /</span>
+            <span className="text-xs font-mono text-[#1E40AF] font-bold">03 /</span>
             <h2 className="text-2xl font-serif font-bold tracking-tight text-[#111111]">
               {currentLang === 'zh' ? '精选案例与项目验证' : 'Selected Business Cases'}
             </h2>
@@ -127,8 +112,9 @@ export default function Projects({ lang }) {
           </span>
         </div>
 
+        {/* 2x2 网格案例图纸恢复 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {defaultProjects.map((item, idx) => (
+          {projects.map((item, idx) => (
             <div key={idx} className="bg-white p-6 border border-[#E5E5E0] rounded-xs shadow-xs space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-[10px] font-mono border-b border-[#E5E5E0] pb-2">
@@ -145,11 +131,11 @@ export default function Projects({ lang }) {
                 </p>
               </div>
 
-              <div className="space-y-3 pt-2 border-t border-[#E5E5E0]">
+              <div className="space-y-2 pt-2 border-t border-[#E5E5E0]">
                 <div className="text-[10px] font-mono font-bold text-[#111111] uppercase">
                   {currentLang === 'zh' ? '关键量化成果' : 'KEY OUTCOMES'}
                 </div>
-                <div className="space-y-1.5 font-mono text-xs font-bold text-[#1E40AF]">
+                <div className="space-y-1 font-mono text-xs font-bold text-[#1E40AF]">
                   {item.outcome.map((res, i) => (
                     <div key={i} className="flex items-start space-x-2">
                       <span>•</span>

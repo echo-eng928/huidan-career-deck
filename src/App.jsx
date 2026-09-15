@@ -11,19 +11,19 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FBFBFA] text-[#111111] font-sans antialiased selection:bg-[#1E40AF] selection:text-white pt-14">
-      {/* 顶部 Header：固定正确姓名 */}
+      {/* 顶部 Header */}
       <Header 
         lang={lang} 
         setLang={setLang} 
       />
 
-      {/* 核心展示模块 */}
+      {/* 5 大核心 Slide 模块 */}
       <main className="space-y-0">
-        <Hero data={{}} lang={lang} />
-        <Career data={{}} lang={lang} />
-        <Projects data={{}} lang={lang} />
-        <About data={{}} lang={lang} />
-        <Contact data={{}} lang={lang} />
+        <Hero lang={lang} />
+        <Career lang={lang} />
+        <Projects lang={lang} />
+        <About lang={lang} />
+        <Contact lang={lang} />
       </main>
     </div>
   );

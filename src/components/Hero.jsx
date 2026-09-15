@@ -1,62 +1,77 @@
 import React from 'react';
+import { User } from 'lucide-react';
 
-export default function Hero({ data, lang, avatarImage }) {
-  const hero = data?.[lang]?.hero || {};
+export default function Hero({ data, lang }) {
+  const currentLang = lang || 'zh';
+
+  const name = data?.[currentLang]?.hero?.name || (currentLang === 'zh' ? '沈绘丹' : 'Huidan Shen');
+  const title = data?.[currentLang]?.hero?.title || (currentLang === 'zh' ? '沟通 · 运营 · 合作伙伴管理' : 'Operations & Partner Governance Lead');
+  const bio = data?.[currentLang]?.hero?.bio || (currentLang === 'zh' 
+    ? '擅长连接人与资源，并推动执行，将业务需求转化为可简化、可复用的结构化结果。'
+    : 'Specializing in connecting stakeholders and executing operations, bridging strategy with scalable results.');
+
+  const avatar = data?.[currentLang]?.hero?.avatar || null;
 
   return (
     <section id="slide-01" className="deck-slide border-b border-[#E5E5E0]">
-      <div className="max-w-5xl mx-auto px-6 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center space-x-2 border-b border-[#1E40AF] pb-1">
-              <span className="text-xs font-mono text-[#1E40AF] font-bold tracking-widest uppercase">
-                01 / CAREER PROFILE
-              </span>
-            </div>
+      <div className="max-w-5xl mx-auto px-6 w-full space-y-8">
+        
+        <div className="flex items-center space-x-3 mb-2">
+          <span className="text-xs font-mono text-[#1E40AF] font-bold">01 /</span>
+          <span className="text-xs font-mono text-[#666666] uppercase tracking-widest">
+            {currentLang === 'zh' ? '职业概况' : 'CAREER OVERVIEW'}
+          </span>
+        </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold tracking-tight text-[#111111] leading-tight">
-              {hero.name || (lang === 'zh' ? '沈绘丹' : 'Huidan Shen')}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          
+          {/* 左侧文字与标语 */}
+          <div className="md:col-span-8 space-y-6">
+            <h1 className="text-5xl md:text-6xl font-serif font-bold tracking-tight text-[#111111] leading-none">
+              {name}
             </h1>
 
-            <div className="text-base sm:text-lg font-mono text-[#1E40AF] font-semibold tracking-wide">
-              {lang === 'zh' ? '沟通 · 运营 · 合作伙伴管理' : 'Communication · Operations · Partner Management'}
+            <div className="text-lg font-serif font-bold text-[#1E40AF]">
+              {title}
             </div>
 
-            <p className="text-base sm:text-lg font-sans text-[#666666] leading-relaxed max-w-xl">
-              {hero.bio || (lang === 'zh' 
-                ? '连接信息、人员与执行力。拥有真实商业项目协作经验，擅长梳理复杂业务流程，并借助 AI 工具完成数字化落地表达。'
-                : 'Connecting information, people, and execution. Experienced in commercial project coordination, workflow optimization, and AI-assisted digital execution.')}
+            <p className="text-sm font-sans text-[#666666] leading-relaxed max-w-xl">
+              {bio}
             </p>
 
-            <div className="pt-4 flex items-center space-x-4 text-xs font-mono text-[#666666]">
-              <span className="flex items-center">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span>
-                {lang === 'zh' ? '探索下一阶段职业节点' : 'Exploring Next Chapter'}
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#666666] pt-2">
+              <span className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>{currentLang === 'zh' ? '探索下一阶段职业节点' : 'Exploring Next Chapter'}</span>
               </span>
               <span>•</span>
-              <span>Shanghai / Jiaxing, China</span>
+              <span>{currentLang === 'zh' ? '中国 上海 / 嘉兴' : 'Shanghai / Jiaxing, China'}</span>
             </div>
           </div>
 
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-48 sm:w-64 aspect-[3/4] bg-[#FBFBFA] p-2 border border-[#E5E5E0] shadow-sm rounded-xs">
-              {avatarImage ? (
-                <img
-                  src={avatarImage}
-                  alt={hero.name || "Portrait"}
-                  className="w-full h-full object-cover rounded-xs border border-[#E5E5E0]"
-                />
-              ) : (
-                <div className="w-full h-full border border-dashed border-[#E5E5E0] flex flex-col items-center justify-center p-4 text-center">
-                  <span className="font-mono text-xs text-[#1E40AF] font-bold">PORTRAIT</span>
-                  <span className="text-[10px] font-mono text-[#666666] mt-1">HUIDAN SHEN</span>
-                </div>
-              )}
+          {/* 右侧肖像展示区 */}
+          <div className="md:col-span-4 flex justify-center md:justify-end">
+            <div className="w-56 h-72 bg-white border border-[#E5E5E0] p-3 rounded-xs shadow-xs flex flex-col justify-between">
+              <div className="w-full h-full bg-[#FBFBFA] border border-dashed border-[#E5E5E0] rounded-xs overflow-hidden flex flex-col items-center justify-center text-center p-4">
+                {avatar ? (
+                  <img src={avatar} alt={name} className="w-full h-full object-cover rounded-xs" />
+                ) : (
+                  <div className="space-y-2">
+                    <User size={32} className="mx-auto text-[#1E40AF]/40" />
+                    <div className="font-serif font-bold text-xs text-[#111111]">
+                      {currentLang === 'zh' ? '肖像照片' : 'Portrait'}
+                    </div>
+                    <div className="font-mono text-[10px] text-[#666666]">
+                      {currentLang === 'zh' ? '点击右上角 ⚙ 上传照片' : 'Upload via Admin Drawer'}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
         </div>
+
       </div>
     </section>
   );

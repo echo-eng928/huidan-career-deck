@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Save, RotateCcw } from 'lucide-react';
+import { X, Save, RotateCcw, Upload } from 'lucide-react';
 
 export default function AdminDrawer({
   isOpen,
@@ -18,7 +18,7 @@ export default function AdminDrawer({
   const lang = editLang || 'zh';
   const content = draftContent[lang] || {};
 
-  // 1. Hero / Stats 更新
+  // 1. Hero / Avatar 图片上传与文本更新
   const updateHero = (field, value) => {
     setDraftContent((prev) => ({
       ...prev,
@@ -32,6 +32,17 @@ export default function AdminDrawer({
     }));
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        updateHero('avatar', reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const updateStat = (index, field, value) => {
     const newStats = [...(content.hero?.stats || [])];
     if (!newStats[index]) newStats[index] = {};
@@ -39,7 +50,7 @@ export default function AdminDrawer({
     updateHero('stats', newStats);
   };
 
-  // 2. Career 职业轨迹全字段更新
+  // 2. Career 更新
   const updateCareer = (index, field, value) => {
     const newItems = [...(content.career?.items || [])];
     if (!newItems[index]) newItems[index] = {};
@@ -67,7 +78,7 @@ export default function AdminDrawer({
     updateCareer(index, 'capabilitiesFormed', arr);
   };
 
-  // 3. Projects 案例更新
+  // 3. Projects 更新
   const updateProject = (index, field, value) => {
     const newItems = [...(content.projects?.items || [])];
     if (!newItems[index]) newItems[index] = {};
@@ -130,7 +141,6 @@ export default function AdminDrawer({
     }));
   };
 
-  // 默认职业时间线字典（区分双语）
   const defaultCareerItems = [
     {
       period: '2022.07 - 2024.05',
@@ -200,7 +210,6 @@ export default function AdminDrawer({
     }
   ];
 
-  // 双语默认成果字典
   const defaultOutcomes = lang === 'zh' ? [
     ["统筹 10+ 核心伙伴参展", "展示满意度达 98%", "全流程零失误交付"],
     ["制定直播话术、后链路转化标准化 SOP", "直播线索转化率达 50%", "达成团队西区抖音渠道 Q3 线索目标"],
@@ -249,7 +258,7 @@ export default function AdminDrawer({
             onClick={() => setActiveTab('hero')}
             className={`px-3 py-2.5 font-bold border-b-2 whitespace-nowrap ${activeTab === 'hero' ? 'border-[#1E40AF] text-[#1E40AF]' : 'border-transparent text-[#666666]'}`}
           >
-            01/02 {lang === 'zh' ? '个人与快照' : 'Hero & Stats'}
+            01/02 {lang === 'zh' ? '个人与肖像' : 'Hero & Portrait'}
           </button>
           <button
             onClick={() => setActiveTab('career')}
@@ -261,7 +270,7 @@ export default function AdminDrawer({
             onClick={() => setActiveTab('projects')}
             className={`px-3 py-2.5 font-bold border-b-2 whitespace-nowrap ${activeTab === 'projects' ? 'border-[#1E40AF] text-[#1E40AF]' : 'border-transparent text-[#666666]'}`}
           >
-            04 {lang === 'zh' ? '案例全量编辑' : 'Cases'}
+            04 {lang === 'zh' ? '案例编辑' : 'Cases'}
           </button>
           <button
             onClick={() => setActiveTab('about')}
@@ -280,53 +289,48 @@ export default function AdminDrawer({
         {/* 内容容器 */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           
-          {/* TAB 1: HERO & STATS */}
+          {/* TAB 1: HERO & AVATAR */}
           {activeTab === 'hero' && (
             <div className="space-y-6 text-xs">
+              
+              {/* 图片上传区域 */}
+              <div className="p-4 border border-[#E5E5E0] bg-[#FBFBFA] rounded-xs space-y-3">
+                <label className="font-mono font-bold text-[#1E40AF] block uppercase">01 / 个人肖像照片 (Portrait Image)</label>
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-20 bg-white border border-[#E5E5E0] rounded-xs overflow-hidden flex items-center justify-center">
+                    {content.hero?.avatar ? (
+                      <img src={content.hero.avatar} alt="Avatar" className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-[10px] font-mono text-[#666666]">无照片</span>
+                    )}
+                  </div>
+                  <label className="cursor-pointer px-4 py-2 bg-[#1E40AF] text-white font-mono font-bold rounded-xs hover:bg-blue-800 transition-colors flex items-center space-x-2">
+                    <Upload size={14} />
+                    <span>{lang === 'zh' ? '上传个人照片' : 'Upload Image'}</span>
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                  </label>
+                </div>
+              </div>
+
               <div className="space-y-3">
-                <label className="font-mono font-bold text-[#1E40AF] block uppercase">01 / Name & Title</label>
+                <label className="font-mono font-bold text-[#1E40AF] block uppercase">姓名 / Title</label>
                 <input
                   type="text"
                   value={content.hero?.name || ''}
                   onChange={(e) => updateHero('name', e.target.value)}
                   className="w-full p-2 border border-[#E5E5E0] rounded-xs font-sans text-sm font-bold focus:border-[#1E40AF] outline-none"
-                  placeholder="沈绘丹 / Huidan Shen"
+                  placeholder={lang === 'zh' ? '沈绘丹 / Huidan Shen' : 'Huidan Shen'}
                 />
               </div>
 
               <div className="space-y-3">
-                <label className="font-mono font-bold text-[#1E40AF] block uppercase">Bio</label>
+                <label className="font-mono font-bold text-[#1E40AF] block uppercase">个人简介 (Bio)</label>
                 <textarea
                   rows={4}
                   value={content.hero?.bio || ''}
                   onChange={(e) => updateHero('bio', e.target.value)}
                   className="w-full p-2 border border-[#E5E5E0] rounded-xs font-sans focus:border-[#1E40AF] outline-none"
                 />
-              </div>
-
-              <div className="space-y-4 border-t border-[#E5E5E0] pt-4">
-                <label className="font-mono font-bold text-[#1E40AF] block uppercase">02 / Metrics</label>
-                {(content.hero?.stats || [{}, {}, {}]).map((st, idx) => (
-                  <div key={idx} className="p-3 bg-[#FBFBFA] border border-[#E5E5E0] rounded-xs space-y-2">
-                    <div className="font-mono font-bold text-[#666666]">METRIC 0{idx + 1}</div>
-                    <div className="grid grid-cols-2 gap-2">
-                      <input
-                        type="text"
-                        placeholder="Value"
-                        value={st.value || ''}
-                        onChange={(e) => updateStat(idx, 'value', e.target.value)}
-                        className="p-1.5 border border-[#E5E5E0] rounded-xs font-mono font-bold"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Label"
-                        value={st.label || ''}
-                        onChange={(e) => updateStat(idx, 'label', e.target.value)}
-                        className="p-1.5 border border-[#E5E5E0] rounded-xs"
-                      />
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           )}

@@ -1,69 +1,45 @@
 import React from 'react';
-import { Settings } from 'lucide-react';
 
-export default function Header({ lang, setLang, onOpenAdmin }) {
-  const scrollToSlide = (slideId) => {
-    document.getElementById(slideId)?.scrollIntoView({ behavior: 'smooth' });
-  };
+export default function Header({ activeSlide, lang, setLang }) {
+  const currentLang = lang || 'zh';
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#FBFBFA]/90 backdrop-blur-md border-b border-[#E5E5E0]">
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#E5E5E0]">
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
         
-        {/* 左侧：Logo / 个人标识 */}
-        <button 
-          onClick={() => scrollToSlide('slide-01')}
-          className="flex items-center space-x-2 text-left hover:opacity-80 transition-opacity"
-        >
-          <span className="font-serif font-bold text-base tracking-wider text-[#111111]">
+        {/* 左侧 Header Logo & 标题 */}
+        <div className="flex items-center space-x-3">
+          <span className="font-serif font-bold tracking-tight text-lg text-[#111111]">
             HUIDAN SHEN
           </span>
-          <span className="text-xs font-mono text-[#666666]">/ PORTFOLIO</span>
-        </button>
+          <span className="text-xs font-mono text-[#666666] hidden sm:inline-block">
+            / PORTFOLIO
+          </span>
+        </div>
 
-        {/* 中间与右侧：模块快捷导航 + 语言切换 + 后台入口 */}
+        {/* 右侧：仅保留导航与中英文切换（⚙ 设置图标已隐形） */}
         <div className="flex items-center space-x-6 text-xs font-mono">
           <nav className="hidden md:flex items-center space-x-5 text-[#666666]">
-            <button 
-              onClick={() => scrollToSlide('slide-03')} 
-              className="hover:text-[#1E40AF] transition-colors"
-            >
-              CAREER
-            </button>
-            <button 
-              onClick={() => scrollToSlide('slide-04')} 
-              className="hover:text-[#1E40AF] transition-colors"
-            >
-              WORK
-            </button>
-            <button 
-              onClick={() => scrollToSlide('slide-05')} 
-              className="hover:text-[#1E40AF] transition-colors"
-            >
-              METHOD
-            </button>
-            <button 
-              onClick={() => scrollToSlide('slide-07')} 
-              className="hover:text-[#1E40AF] transition-colors"
-            >
-              ABOUT
-            </button>
-            <button 
-              onClick={() => scrollToSlide('slide-08')} 
-              className="hover:text-[#1E40AF] transition-colors"
-            >
-              CONTACT
-            </button>
+            <a href="#slide-03" className="hover:text-[#111111] transition-colors uppercase">
+              {currentLang === 'zh' ? '职业轨迹' : 'CAREER'}
+            </a>
+            <a href="#slide-04" className="hover:text-[#111111] transition-colors uppercase">
+              {currentLang === 'zh' ? '精选案例' : 'WORK'}
+            </a>
+            <a href="#slide-07" className="hover:text-[#111111] transition-colors uppercase">
+              {currentLang === 'zh' ? '作品留痕' : 'ABOUT'}
+            </a>
+            <a href="#slide-08" className="hover:text-[#111111] transition-colors uppercase">
+              {currentLang === 'zh' ? '联系方式' : 'CONTACT'}
+            </a>
           </nav>
 
-          <div className="h-4 w-[1px] bg-[#E5E5E0] hidden md:block" />
-
           {/* 语言切换按钮 */}
-          <div className="flex items-center space-x-1 border border-[#E5E5E0] p-0.5 rounded-xs bg-white">
+          <div className="flex border border-[#E5E5E0] rounded-xs p-0.5 bg-[#FBFBFA]">
             <button
               onClick={() => setLang('zh')}
               className={`px-2 py-0.5 rounded-xs transition-colors ${
-                lang === 'zh' ? 'bg-[#1E40AF] text-white font-bold' : 'text-[#666666] hover:text-[#111111]'
+                currentLang === 'zh' ? 'bg-[#1E40AF] text-white font-bold' : 'text-[#666666] hover:text-[#111111]'
               }`}
             >
               ZH
@@ -71,21 +47,12 @@ export default function Header({ lang, setLang, onOpenAdmin }) {
             <button
               onClick={() => setLang('en')}
               className={`px-2 py-0.5 rounded-xs transition-colors ${
-                lang === 'en' ? 'bg-[#1E40AF] text-white font-bold' : 'text-[#666666] hover:text-[#111111]'
+                currentLang === 'en' ? 'bg-[#1E40AF] text-white font-bold' : 'text-[#666666] hover:text-[#111111]'
               }`}
             >
               EN
             </button>
           </div>
-
-          {/* 管理抽屉按钮 */}
-          <button
-            onClick={onOpenAdmin}
-            className="p-1.5 text-[#666666] hover:text-[#1E40AF] hover:bg-white border border-transparent hover:border-[#E5E5E0] rounded-xs transition-all"
-            title="Edit Mode"
-          >
-            <Settings size={14} />
-          </button>
         </div>
 
       </div>

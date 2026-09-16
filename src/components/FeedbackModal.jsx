@@ -6,27 +6,37 @@ export default function FeedbackModal() {
   const [contact, setContact] = useState('');
   const [status, setStatus] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!message.trim()) return;
 
     setStatus('sending');
 
     try {
-      // 组装邮件主题和正文
-      const subject = encodeURIComponent('【网站访客留言】来自个人职业档案');
-      const body = encodeURIComponent(
-        `访客留言内容：\n${message}\n\n联系方式：${contact || '未填写'}`
-      );
+      const response = await fetch('https://formspree.io/f/xyezgdqp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ 
+          message: message, 
+          contact: contact || '未留下联系方式' 
+        }),
+      });
 
-      // 直接唤起用户的邮件客户端发送到你的邮箱
-      window.location.href = `mailto:echoa981@gmail.com?subject=${subject}&body=${body}`;
-      
-      setStatus('success');
-      setTimeout(() => {
-        setIsOpen(false);
-        setStatus('');
-      }, 2000);
+      if (response.ok) {
+        setStatus('success');
+        setMessage('');
+        setContact('');
+        // 2秒后自动关闭弹窗
+        setTimeout(() => {
+          setIsOpen(false);
+          setStatus('');
+        }, 2000);
+      } else {
+        setStatus('error');
+      }
     } catch (error) {
       setStatus('error');
     }
@@ -34,7 +44,7 @@ export default function FeedbackModal() {
 
   return (
     <>
-      {/* 右下角悬浮反馈按钮（完美适配手机与电脑） */}
+      {/* 右下角悬浮反馈按钮 */}
       <button
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-200 text-sm font-medium focus:outline-none"
@@ -104,13 +114,18 @@ export default function FeedbackModal() {
                   disabled={status === 'sending'}
                   className="px-5 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition-colors disabled:opacity-50"
                 >
-                  {status === 'sending' ? '准备中...' : '提交反馈'}
+                  {status === 'sending' ? '发送中...' : '提交反馈'}
                 </button>
               </div>
 
               {status === 'success' && (
                 <p className="text-xs text-green-600 dark:text-green-400 text-center mt-2">
-                  ✨ 正在为您调起邮件客户端发送反馈...
+                  ✨ 感谢你的留言！已经成功收到啦。
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-xs text-red-600 dark:text-red-400 text-center mt-2">
+                  发送失败了，请稍后重试。
                 </p>
               )}
             </form>

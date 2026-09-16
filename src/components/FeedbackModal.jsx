@@ -6,41 +6,29 @@ export default function FeedbackModal() {
   const [contact, setContact] = useState('');
   const [status, setStatus] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!message.trim()) return;
 
     setStatus('sending');
 
     try {
-      // 推荐使用 Formspree 免费接收表单，或者直接通过 mailto 发送
-      // 替换为你的 Formspree endpoint (例如: https://formspree.io/f/your_id)
-      // 如果没有配置，我们也可以优雅地使用 mailto 调起邮箱
-      const response = await fetch('https://formspree.io/f/mkgredon', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message, contact }),
-      });
+      // 组装邮件主题和正文
+      const subject = encodeURIComponent('【网站访客留言】来自个人职业档案');
+      const body = encodeURIComponent(
+        `访客留言内容：\n${message}\n\n联系方式：${contact || '未填写'}`
+      );
 
-      if (response.ok) {
-        setStatus('success');
-        setMessage('');
-        setContact('');
-        setTimeout(() => {
-          setIsOpen(false);
-          setStatus('');
-        }, 2000);
-      } else {
-        setStatus('error');
-      }
-    } catch (error) {
-      // 降级方案：如果未配置网络服务，直接通过邮件发送
-      window.location.href = `mailto:echoa981@gmail.com?subject=网站访客反馈&body=${encodeURIComponent(
-        message + (contact ? `\n\n联系方式: ${contact}` : '')
-      )}`;
+      // 直接唤起用户的邮件客户端发送到你的邮箱
+      window.location.href = `mailto:echoa981@gmail.com?subject=${subject}&body=${body}`;
+      
       setStatus('success');
+      setTimeout(() => {
+        setIsOpen(false);
+        setStatus('');
+      }, 2000);
+    } catch (error) {
+      setStatus('error');
     }
   };
 
@@ -116,18 +104,13 @@ export default function FeedbackModal() {
                   disabled={status === 'sending'}
                   className="px-5 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition-colors disabled:opacity-50"
                 >
-                  {status === 'sending' ? '发送中...' : '提交反馈'}
+                  {status === 'sending' ? '准备中...' : '提交反馈'}
                 </button>
               </div>
 
               {status === 'success' && (
                 <p className="text-xs text-green-600 dark:text-green-400 text-center mt-2">
-                  ✨ 感谢你的留言！已经成功收到啦。
-                </p>
-              )}
-              {status === 'error' && (
-                <p className="text-xs text-red-600 dark:text-red-400 text-center mt-2">
-                  发送遇到了一点小问题，不过没关系，您也可以直接发邮件联系我。
+                  ✨ 正在为您调起邮件客户端发送反馈...
                 </p>
               )}
             </form>

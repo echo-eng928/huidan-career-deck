@@ -20,3 +20,20 @@ body {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+
+/* 欢迎语动画 */
+@keyframes welcomeNoteIn {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.welcome-note-animation {
+  animation: welcomeNoteIn 0.8s ease-out forwards;
+}

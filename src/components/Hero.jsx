@@ -1,5 +1,6 @@
 import React from 'react';
 import defaultAvatar from '../assets/avatar.jpg';
+import WelcomeNote from './WelcomeNote';
 
 export default function Hero({ lang }) {
   const currentLang = lang || 'zh';
@@ -12,7 +13,7 @@ export default function Hero({ lang }) {
 
   return (
     <section id="slide-01" className="deck-slide border-b border-[#E5E5E0]">
-      <div className="max-w-5xl mx-auto px-6 w-full space-y-8">
+      <div className="max-w-6xl mx-auto px-6 w-full space-y-8">
         
         <div className="flex items-center space-x-3 mb-2">
           <span className="text-xs font-mono text-[#1E40AF] font-bold">01 /</span>
@@ -21,11 +22,11 @@ export default function Hero({ lang }) {
           </span>
         </div>
 
-        {/* 严格锁定左右两栏双栏结构，右侧为精美相框 */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '2rem' }}>
+        {/* 核心三栏结构：左侧文字 | 中间靠上的手写便签区 | 右侧相框 */}
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
           
           {/* 左侧文字与标语区 */}
-          <div style={{ flex: '1 1 0%', minWidth: '0' }} className="space-y-6">
+          <div className="flex-1 min-w-0 space-y-6">
             <h1 className="text-5xl md:text-6xl font-serif font-bold tracking-tight text-[#111111] leading-none">
               {name}
             </h1>
@@ -34,7 +35,7 @@ export default function Hero({ lang }) {
               {title}
             </div>
 
-            <p className="text-sm font-sans text-[#666666] leading-relaxed max-w-xl">
+            <p className="text-sm font-sans text-[#666666] leading-relaxed max-w-lg">
               {bio}
             </p>
 
@@ -48,7 +49,12 @@ export default function Hero({ lang }) {
             </div>
           </div>
 
-          {/* 右侧：第二张图中的高质感精致相框 */}
+          {/* 🌟 完美对齐红框位置：使用 items-start 让它紧贴顶部，与姓名上端平齐 */}
+          <div className="hidden lg:flex items-start justify-center pt-1 px-4">
+            <WelcomeNote />
+          </div>
+
+          {/* 右侧：高质感精致相框 */}
           <div style={{ width: '220px', height: '270px', flexShrink: 0 }} className="bg-white p-2 border border-[#E5E5E0] shadow-sm rounded-xs">
             <img 
               src={defaultAvatar} 
@@ -57,6 +63,11 @@ export default function Hero({ lang }) {
             />
           </div>
 
+        </div>
+
+        {/* 移动端向下适配 */}
+        <div className="block lg:hidden pt-4">
+          <WelcomeNote />
         </div>
 
       </div>

@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { photos } from '../data/disneyPhotos'; // 确保你的照片数据路径正确
+import { photos } from '../data/disneyPhotos'; 
 
-// 极简星尘背景
+// 🌟 极简星尘背景 (修复：恢复了原本的小星星粒子特效)
 const MagicDust = () => {
   const [particles, setParticles] = useState([]);
   
@@ -61,7 +61,7 @@ export default function DisneyHero() {
       particleCount: 50, 
       spread: 70, 
       origin: { x, y }, 
-      colors: photo.colors || ['#ffffff', '#ffb6c1', '#add8e6'], // 如果没有提供颜色，给个默认的梦幻色系
+      colors: photo.colors || ['#ffffff', '#ffb6c1', '#add8e6'], 
       ticks: 120, 
       gravity: 1.2, 
       zIndex: 60 
@@ -75,35 +75,21 @@ export default function DisneyHero() {
   // 🌟 顶尖杂志排版：专为 8 张照片量身定制的错落阵列
   const getLayoutStyles = (index) => {
     const layouts = [
-      // --- 顶部开篇：视觉张力 ---
-      // 0: 左侧中图，稍微向下，向左微倾
       { c: "col-span-1 md:col-span-4 mt-12 md:mt-16", r: -3 },
-      // 1: 中间大图，向上突破（视觉焦点），向右微倾
       { c: "col-span-1 md:col-span-5 mt-0 md:-mt-6", r: 2 },
-      // 2: 右侧小图，大幅度下沉，制造右侧呼吸感
       { c: "col-span-1 md:col-span-3 mt-8 md:mt-32", r: -2 },
-
-      // --- 中段穿插：咬合与错位 ---
-      // 3: 左侧小图，托住左边
       { c: "col-span-1 md:col-span-3 mt-6 md:mt-10", r: 1 },
-      // 4: 中间中图，向上深深切入上一行的留白里
       { c: "col-span-1 md:col-span-4 -mt-4 md:-mt-16", r: -3 },
-      // 5: 右侧大图，沉稳压阵
       { c: "col-span-1 md:col-span-5 mt-10 md:mt-24", r: 3 },
-
-      // --- 优雅收尾：左右留白，不占满全屏 ---
-      // 6: 偏左大图，继续向上咬合，左侧空出 1 列
       { c: "col-span-1 md:col-span-5 md:col-start-2 mt-8 md:-mt-8", r: -2 },
-      // 7: 偏右中图，沉底收尾，右侧空出 1 列
       { c: "col-span-1 md:col-span-4 md:col-start-8 mt-12 md:mt-16", r: 2 },
     ];
-    // 严丝合缝匹配 8 张图
     return layouts[index] || layouts[0]; 
   };
+
   return (
     <section className="relative w-full min-h-screen bg-[#0A0A0A] flex flex-col items-center pt-28 pb-32 md:pt-32 overflow-hidden selection:bg-white selection:text-black">
       
-      {/* 记得把 bgm.mp3 放在 public 文件夹下 */}
       <audio ref={audioRef} src="/bgm.mp3" loop />
       <div className="absolute inset-0 bg-gradient-to-b from-[#111] to-[#0A0A0A] z-0" />
       <MagicDust />
@@ -136,13 +122,19 @@ export default function DisneyHero() {
               }}
               onClick={(e) => handlePhotoClick(e, photo)}
             >
+              {/* 🌟 1. 高级微光骨架屏：利用 shimmer 动画完美掩盖加载时间 */}
+              <div className="absolute inset-0 bg-[#1a1a1a] overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-shimmer before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent z-0" />
+
+              {/* 🌟 2. 核心大图：控制网络优先级与丝滑淡入 */}
               <img 
                 src={photo.src} 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 opacity-0 data-[loaded=true]:opacity-100 group-hover:scale-105 z-10" 
                 alt={photo.title || "Disney Magic"}
-                loading="lazy"
+                loading={index < 2 ? "eager" : "lazy"} 
+                fetchPriority={index === 1 ? "high" : "auto"}
+                onLoad={(e) => e.target.setAttribute('data-loaded', 'true')}
               />
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none" />
             </motion.div>
           );
         })}

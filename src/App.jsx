@@ -1,3 +1,4 @@
+import DisneyHero from './components/DisneyHero';
 import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -15,7 +16,7 @@ export default function App() {
     <div className="min-h-screen bg-[#FBFBFA]">
       <Header lang={lang} setLang={setLang} />
       
-      <Hero lang={lang} />
+      <DisneyHero lang={lang} />
       <Career lang={lang} />
       <Projects lang={lang} />
       <About lang={lang} />

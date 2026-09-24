@@ -9,6 +9,18 @@ export default {
   ],
   theme: {
     extend: {
+      // 动画配置
+      // tailwind.config.js 的片段
+      animation: {
+        'spin-slow': 'spin 4s linear infinite', 
+        'shimmer': 'shimmer 2s infinite', 
+      },
+      keyframes: { 
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' },
+        }
+      } 
+      // 颜色配置
       colors: {
         brand: {
           bg: '#FBFBFA',

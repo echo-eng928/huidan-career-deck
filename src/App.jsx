@@ -10,7 +10,7 @@ import FeedbackModal from './components/FeedbackModal';
 import WelcomeNote from './components/WelcomeNote';
 
 export default function App() {
-  const [lang, setLang] = useState('zh');
+  const [lang, setLang] = useState('en');
 
   return (
     <div className="min-h-screen bg-[#FBFBFA]">

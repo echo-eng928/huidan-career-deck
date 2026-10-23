@@ -1,14 +1,15 @@
 import React from 'react';
 import defaultAvatar from '../assets/avatar.jpg';
+import { ArrowUpRight, Download } from 'lucide-react';
 
 export default function Hero({ lang }) {
   const currentLang = lang || 'zh';
 
   const name = currentLang === 'zh' ? '沈绘丹' : 'Huidan Shen';
   const title = currentLang === 'zh' ? '沟通 · 运营 · 合作伙伴管理' : 'Operations & Partner Governance Lead';
-  const bio = currentLang === 'zh' 
-    ? '全球一线新能源车企（理想汽车）供应商管理公关经验 & 头部网约车（滴滴）渠道运营经验。善于以结果为导向整合资源、控制成本与跨部门协作。'
-    : 'Experienced in supplier management PR at top-tier EV companies (Li Auto) and channel operations at leading ride-hailing platforms (DiDi).';
+  const bio = currentLang === 'zh'
+    ? '拥有理想汽车合作伙伴运营与滴滴渠道运营经验：曾统筹 10+ 家技术伙伴完成合作伙伴技术展，满意度达 98%；通过渠道运营释放 20 万元以上灵活预算，并将单笔交易成本降低 15% 以上。'
+    : 'At Li Auto, coordinated 10+ technology partners for an exhibition delivered with 98% satisfaction and zero operational issues. In DiDi channel operations, unlocked RMB 200K+ in flexible budget and reduced per-transaction costs by 15%+.';
 
   return (
     <section id="slide-01" className="deck-slide border-b border-[#E5E5E0] min-h-screen flex items-center justify-center bg-[#FBFBFA]">
@@ -34,18 +35,40 @@ export default function Hero({ lang }) {
               {title}
             </div>
 
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-mono text-[#176B45]">
+              <span className="flex items-center gap-2 font-semibold">
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" aria-hidden="true"></span>
+                {currentLang === 'zh' ? '开放机会' : 'Available for'}
+              </span>
+              <span>{currentLang === 'zh' ? '全球远程' : 'Remote (Global)'}</span>
+              <span>{currentLang === 'zh' ? '全职' : 'Full-time'}</span>
+              <span>{currentLang === 'zh' ? '顾问合作' : 'Consulting'}</span>
+            </div>
+
             <p className="text-sm font-sans text-[#666666] leading-relaxed max-w-xl">
               {bio}
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#666666] pt-2">
-              <span className="flex items-center space-x-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                <span>{currentLang === 'zh' ? '探索下一阶段职业节点' : 'Exploring Next Chapter'}</span>
-              </span>
-              <span>•</span>
-              <span>{currentLang === 'zh' ? '中国 上海 / 嘉兴' : 'Shanghai / Jiaxing, China'}</span>
+            <div className="flex flex-wrap gap-3 pt-1">
+              <a
+                href="https://calendly.com/echoa981/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center justify-center gap-2 bg-[#1E40AF] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#17358F] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E40AF]"
+              >
+                {currentLang === 'zh' ? '预约 15 分钟交流' : 'Book a 15-min Chat'}
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+              <a
+                href="/resume.pdf"
+                download
+                className="inline-flex min-h-11 items-center justify-center gap-2 border border-[#C9D1D9] bg-white px-5 text-sm font-semibold text-[#222222] transition-colors hover:bg-[#F2F4F5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E40AF]"
+              >
+                {currentLang === 'zh' ? '下载简历 (PDF)' : 'Download Resume (PDF)'}
+                <Download size={16} aria-hidden="true" />
+              </a>
             </div>
+
           </div>
 
           {/* 右侧：专业干练的职场相框 */}
